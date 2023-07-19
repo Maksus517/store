@@ -1,29 +1,28 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 
 from products.models import Product, ProductCategory, Basket
+from common.views import CommonMixin
 
 
-def index(request):
-    context = {
-        'title': 'Магазин одежды - тест'
-    }
-    return render(request, 'products/index.html', context=context)
+class IndexView(CommonMixin, TemplateView):
+    template_name = 'products/index.html'
+    title = 'Магазин одежды - тест'
 
 
-def products(request, category_id=None, page_number=1):
-    product = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
-    per_page = 3
-    paginator = Paginator(product, per_page)
-    products_paginator = paginator.page(page_number)
+class ProductsListView(CommonMixin, ListView):
+    model = Product
+    template_name = 'products/products.html'
+    paginate_by = 3
+    title = 'Каталог - тест'
+    categories = ProductCategory.objects.all()
 
-    context = {
-        'title': 'Каталог - тест',
-        'categories': ProductCategory.objects.all(),
-        'products': products_paginator
-    }
-    return render(request, 'products/products.html', context=context)
+    def get_queryset(self):
+        queryset = super(ProductsListView, self).get_queryset()
+        category_id = self.kwargs.get('category_id')
+        return queryset.filter(category_id=category_id) if category_id else queryset
 
 
 @login_required
