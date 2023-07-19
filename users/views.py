@@ -47,3 +47,4 @@ class EmailVerificationView(CommonMixin, TemplateView):
             user.save()
             return super(EmailVerificationView, self).get(request, *args, **kwargs)
         return HttpResponseRedirect(reverse('index'))
+
