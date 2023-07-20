@@ -20,7 +20,12 @@ env = environ.Env(
     EMAIL_HOST=str,
     EMAIL_PORT=str,
     EMAIL_HOST_USER=str,
-    EMAIL_HOST_PASSWORD=str
+    EMAIL_HOST_PASSWORD=str,
+    DB_NAME=str,
+    DB_USER=str,
+    DB_PASSWORD=str,
+    DB_HOST=str,
+    DB_PORT=str
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -92,9 +97,13 @@ WSGI_APPLICATION = 'store.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": env('DB_NAME'),
+        "USER": env('DB_USER'),
+        "PASSWORD": env('DB_PASSWORD'),
+        "HOST": env('DB_HOST'),
+        "PORT": env('DB_PORT'),
     }
 }
 
