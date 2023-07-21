@@ -25,7 +25,9 @@ env = environ.Env(
     DB_USER=str,
     DB_PASSWORD=str,
     DB_HOST=str,
-    DB_PORT=str
+    DB_PORT=str,
+    STRIPE_PUBLIC_KEY=str,
+    STRIPE_SECRET_KEY=str,
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -57,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.humanize',
 
     'allauth',
     'allauth.account',
@@ -66,7 +69,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
 
     'products',
-    'users'
+    'orders',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -215,3 +219,8 @@ SOCIALACCOUNT_PROVIDERS = {
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+
+# Yookassa
+
+STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
