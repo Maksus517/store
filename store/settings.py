@@ -28,6 +28,7 @@ env = environ.Env(
     DB_PORT=str,
     STRIPE_PUBLIC_KEY=str,
     STRIPE_SECRET_KEY=str,
+    STRIPE_WEBHOOK_SECRET=str,
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -224,3 +225,4 @@ CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 
 STRIPE_PUBLIC_KEY = env('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
