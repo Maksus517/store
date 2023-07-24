@@ -63,6 +63,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.humanize',
 
+    'rest_framework',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -73,6 +75,7 @@ INSTALLED_APPS = [
     'products',
     'orders',
     'users',
+    'api',
 ]
 
 MIDDLEWARE = [
